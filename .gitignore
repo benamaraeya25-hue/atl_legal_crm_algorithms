@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+*.egg-info/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+results/log_*.txt
+results/ALL_DONE
