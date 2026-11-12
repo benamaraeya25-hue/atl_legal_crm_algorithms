@@ -1,0 +1,46 @@
+task,case,method,observed_exponent,points
+sorting,random,Merge Sort,1.12,4
+sorting,random,Quick Sort (first pivot),1.14,4
+sorting,random,Quick Sort (random pivot),1.12,4
+sorting,random,Heap Sort,1.19,4
+sorting,random,Python sorted() (reference),1.10,4
+sorting,sorted,Insertion Sort,1.05,4
+sorting,sorted,Merge Sort,1.15,4
+sorting,sorted,Quick Sort (random pivot),1.10,4
+sorting,sorted,Heap Sort,1.15,4
+sorting,sorted,Python sorted() (reference),1.12,4
+sorting,reversed,Merge Sort,1.12,4
+sorting,reversed,Quick Sort (random pivot),1.10,4
+sorting,reversed,Heap Sort,1.12,4
+sorting,reversed,Python sorted() (reference),1.07,4
+comparisons,random,Insertion Sort,1.99,5
+comparisons,random,Merge Sort,1.15,5
+comparisons,random,Quick Sort (first pivot),1.17,5
+comparisons,random,Quick Sort (random pivot),1.19,5
+comparisons,random,Heap Sort,1.16,5
+comparisons,reversed,Insertion Sort,2.00,5
+comparisons,reversed,Merge Sort,1.13,5
+comparisons,reversed,Quick Sort (first pivot),2.00,5
+comparisons,reversed,Quick Sort (random pivot),1.18,5
+comparisons,reversed,Heap Sort,1.16,5
+lookup,best,Linear Search,0.01,4
+lookup,best,Binary Search,-0.01,4
+lookup,best,Hash Table (own),-0.00,4
+lookup,best,dict (reference),-0.00,4
+lookup,average,Linear Search,1.07,4
+lookup,average,Binary Search,0.13,4
+lookup,average,Hash Table (own),0.00,4
+lookup,average,dict (reference),0.01,4
+lookup,worst,Linear Search,1.05,4
+lookup,worst,Binary Search,0.11,4
+lookup,worst,Hash Table (own),0.00,4
+lookup,worst,dict (reference),0.00,4
+retrieval,rare,A scan + sort,0.99,4
+retrieval,rare,B index + sort,0.60,4
+retrieval,rare,C index + heap Top-K,0.39,4
+retrieval,medium,A scan + sort,0.98,4
+retrieval,medium,B index + sort,0.85,4
+retrieval,medium,C index + heap Top-K,0.60,4
+retrieval,common,A scan + sort,1.00,4
+retrieval,common,B index + sort,0.99,4
+retrieval,common,C index + heap Top-K,0.77,4

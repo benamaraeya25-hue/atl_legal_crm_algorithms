@@ -1,0 +1,61 @@
+method,n,scenario,microseconds
+Hash table build (own),1000,setup,825.8
+dict build (reference),1000,setup,72.0
+Hash table longest chain,1000,setup,4
+Linear Search,1000,best,0.146
+Linear Search,1000,average,12.146
+Linear Search,1000,worst,25.296
+Binary Search,1000,best,0.162
+Binary Search,1000,average,0.811
+Binary Search,1000,worst,0.680
+Hash Table (own),1000,best,0.243
+Hash Table (own),1000,average,0.249
+Hash Table (own),1000,worst,0.181
+dict (reference),1000,best,0.067
+dict (reference),1000,average,0.059
+dict (reference),1000,worst,0.062
+Hash table build (own),10000,setup,10653.0
+dict build (reference),10000,setup,698.6
+Hash table longest chain,10000,setup,7
+Linear Search,10000,best,0.143
+Linear Search,10000,average,134.415
+Linear Search,10000,worst,284.393
+Binary Search,10000,best,0.166
+Binary Search,10000,average,1.199
+Binary Search,10000,worst,1.015
+Hash Table (own),10000,best,0.249
+Hash Table (own),10000,average,0.253
+Hash Table (own),10000,worst,0.217
+dict (reference),10000,best,0.067
+dict (reference),10000,average,0.063
+dict (reference),10000,worst,0.070
+Hash table build (own),100000,setup,342931.3
+dict build (reference),100000,setup,14314.4
+Hash table longest chain,100000,setup,6
+Linear Search,100000,best,0.145
+Linear Search,100000,average,1653.262
+Linear Search,100000,worst,3514.114
+Binary Search,100000,best,0.153
+Binary Search,100000,average,1.723
+Binary Search,100000,worst,1.227
+Hash Table (own),100000,best,0.243
+Hash Table (own),100000,average,0.238
+Hash Table (own),100000,worst,0.234
+dict (reference),100000,best,0.066
+dict (reference),100000,average,0.069
+dict (reference),100000,worst,0.066
+Hash table build (own),1000000,setup,7650457.1
+dict build (reference),1000000,setup,259408.0
+Hash table longest chain,1000000,setup,6
+Linear Search,1000000,best,0.154
+Linear Search,1000000,average,19185.650
+Linear Search,1000000,worst,33513.715
+Binary Search,1000000,best,0.153
+Binary Search,1000000,average,1.910
+Binary Search,1000000,worst,1.463
+Hash Table (own),1000000,best,0.239
+Hash Table (own),1000000,average,0.256
+Hash Table (own),1000000,worst,0.183
+dict (reference),1000000,best,0.065
+dict (reference),1000000,average,0.064
+dict (reference),1000000,worst,0.064

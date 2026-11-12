@@ -1,0 +1,73 @@
+algorithm,n,scenario,status,repeats,min_s,median_s,max_s
+Insertion Sort,1000,random,ok,5,0.013561,0.013654,0.014257
+Merge Sort,1000,random,ok,5,0.001224,0.001260,0.001433
+Quick Sort (first pivot),1000,random,ok,5,0.000712,0.000760,0.000779
+Quick Sort (random pivot),1000,random,ok,5,0.000902,0.000927,0.000979
+Heap Sort,1000,random,ok,5,0.001266,0.001305,0.001342
+Python sorted() (reference),1000,random,ok,5,0.000135,0.000162,0.000165
+Insertion Sort,1000,sorted,ok,5,0.000075,0.000077,0.000088
+Merge Sort,1000,sorted,ok,5,0.000838,0.000867,0.000869
+Quick Sort (first pivot),1000,sorted,ok,5,0.011853,0.012059,0.012731
+Quick Sort (random pivot),1000,sorted,ok,5,0.000837,0.000866,0.000880
+Heap Sort,1000,sorted,ok,5,0.001308,0.001335,0.001352
+Python sorted() (reference),1000,sorted,ok,5,0.000017,0.000018,0.000019
+Insertion Sort,1000,reversed,ok,5,0.025615,0.025778,0.026808
+Merge Sort,1000,reversed,ok,5,0.000863,0.000880,0.000910
+Quick Sort (first pivot),1000,reversed,ok,5,0.020014,0.023220,0.026556
+Quick Sort (random pivot),1000,reversed,ok,5,0.000891,0.001262,0.001278
+Heap Sort,1000,reversed,ok,5,0.001506,0.001537,0.001563
+Python sorted() (reference),1000,reversed,ok,5,0.000023,0.000025,0.000035
+Insertion Sort,10000,random,ok,1,1.637059,1.637059,1.637059
+Merge Sort,10000,random,ok,3,0.015105,0.015524,0.015890
+Quick Sort (first pivot),10000,random,ok,3,0.013743,0.014056,0.014191
+Quick Sort (random pivot),10000,random,ok,3,0.011696,0.011719,0.012024
+Heap Sort,10000,random,ok,3,0.018124,0.018621,0.021617
+Python sorted() (reference),10000,random,ok,3,0.001758,0.001820,0.002123
+Insertion Sort,10000,sorted,ok,3,0.000758,0.000799,0.001038
+Merge Sort,10000,sorted,ok,3,0.010338,0.010433,0.010597
+Quick Sort (first pivot),10000,sorted,ok,1,1.261882,1.261882,1.261882
+Quick Sort (random pivot),10000,sorted,ok,3,0.010681,0.010893,0.011035
+Heap Sort,10000,sorted,ok,3,0.018113,0.018305,0.018324
+Python sorted() (reference),10000,sorted,ok,3,0.000118,0.000120,0.000122
+Insertion Sort,10000,reversed,ok,1,2.817073,2.817073,2.817073
+Merge Sort,10000,reversed,ok,3,0.010252,0.013292,0.014589
+Quick Sort (first pivot),10000,reversed,ok,1,2.248243,2.248243,2.248243
+Quick Sort (random pivot),10000,reversed,ok,3,0.010442,0.010559,0.012559
+Heap Sort,10000,reversed,ok,3,0.016543,0.016633,0.016643
+Python sorted() (reference),10000,reversed,ok,3,0.000127,0.000130,0.000138
+Insertion Sort,100000,random,skipped (quadratic),0,,,
+Merge Sort,100000,random,ok,3,0.197003,0.200153,0.255061
+Quick Sort (first pivot),100000,random,ok,3,0.123048,0.124292,0.199632
+Quick Sort (random pivot),100000,random,ok,3,0.140533,0.140552,0.141194
+Heap Sort,100000,random,ok,3,0.257468,0.260885,0.263178
+Python sorted() (reference),100000,random,ok,3,0.022871,0.022947,0.022951
+Insertion Sort,100000,sorted,ok,3,0.008641,0.008825,0.009123
+Merge Sort,100000,sorted,ok,3,0.135891,0.154475,0.243912
+Quick Sort (first pivot),100000,sorted,skipped (quadratic),0,,,
+Quick Sort (random pivot),100000,sorted,ok,3,0.133525,0.134006,0.139648
+Heap Sort,100000,sorted,ok,3,0.253817,0.260011,0.289251
+Python sorted() (reference),100000,sorted,ok,3,0.002403,0.002427,0.002527
+Insertion Sort,100000,reversed,skipped (quadratic),0,,,
+Merge Sort,100000,reversed,ok,3,0.140490,0.142232,0.144395
+Quick Sort (first pivot),100000,reversed,skipped (quadratic),0,,,
+Quick Sort (random pivot),100000,reversed,ok,3,0.142539,0.152404,0.225213
+Heap Sort,100000,reversed,ok,3,0.237380,0.239338,0.249076
+Python sorted() (reference),100000,reversed,ok,3,0.002267,0.002398,0.002809
+Insertion Sort,1000000,random,skipped (quadratic),0,,,
+Merge Sort,1000000,random,ok,3,2.991827,3.016765,3.038386
+Quick Sort (first pivot),1000000,random,ok,3,2.050341,2.249330,2.266413
+Quick Sort (random pivot),1000000,random,ok,3,2.153938,2.189743,2.207981
+Heap Sort,1000000,random,ok,1,5.086748,5.086748,5.086748
+Python sorted() (reference),1000000,random,ok,3,0.324405,0.328930,0.337142
+Insertion Sort,1000000,sorted,ok,3,0.106658,0.108707,0.158456
+Merge Sort,1000000,sorted,ok,3,2.205436,2.448330,2.495748
+Quick Sort (first pivot),1000000,sorted,skipped (quadratic),0,,,
+Quick Sort (random pivot),1000000,sorted,ok,3,1.598905,1.701578,1.773343
+Heap Sort,1000000,sorted,ok,1,3.805019,3.805019,3.805019
+Python sorted() (reference),1000000,sorted,ok,3,0.035306,0.035835,0.055866
+Insertion Sort,1000000,reversed,skipped (quadratic),0,,,
+Merge Sort,1000000,reversed,ok,3,2.121652,2.240611,2.354361
+Quick Sort (first pivot),1000000,reversed,skipped (quadratic),0,,,
+Quick Sort (random pivot),1000000,reversed,ok,3,2.327022,2.407900,2.448247
+Heap Sort,1000000,reversed,ok,1,3.472159,3.472159,3.472159
+Python sorted() (reference),1000000,reversed,ok,3,0.032378,0.035025,0.035435

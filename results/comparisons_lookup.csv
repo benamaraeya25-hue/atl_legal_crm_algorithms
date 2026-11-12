@@ -1,0 +1,10 @@
+method,n,avg_comparisons
+Linear Search,1000,557.67
+Binary Search,1000,16.58
+Hash Table (own),1000,1.27
+Linear Search,10000,4683.26
+Binary Search,10000,23.64
+Hash Table (own),10000,1.25
+Linear Search,100000,47475.16
+Binary Search,100000,30.40
+Hash Table (own),100000,1.18

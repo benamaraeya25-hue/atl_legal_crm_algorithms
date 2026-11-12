@@ -1,0 +1,8 @@
+structure,n,peak_extra_bytes,bytes_per_item
+Insertion Sort,20000,160204,8.0
+Merge Sort,20000,653200,32.7
+Quick Sort (first pivot),20000,163056,8.2
+Quick Sort (random pivot),20000,161856,8.1
+Heap Sort,20000,160252,8.0
+Hash table (own),100000,31784664,317.8
+dict (reference),100000,10304044,103.0

@@ -1,0 +1,76 @@
+algorithm,n,scenario,comparisons
+Insertion Sort,500,random,63385
+Merge Sort,500,random,3849
+Quick Sort (first pivot),500,random,4335
+Quick Sort (random pivot),500,random,4413
+Heap Sort,500,random,7415
+Insertion Sort,500,sorted,499
+Merge Sort,500,sorted,2216
+Quick Sort (first pivot),500,sorted,124750
+Quick Sort (random pivot),500,sorted,4405
+Heap Sort,500,sorted,7756
+Insertion Sort,500,reversed,124750
+Merge Sort,500,reversed,2272
+Quick Sort (first pivot),500,reversed,124750
+Quick Sort (random pivot),500,reversed,4717
+Heap Sort,500,reversed,7010
+Insertion Sort,1000,random,258094
+Merge Sort,1000,random,8714
+Quick Sort (first pivot),1000,random,11863
+Quick Sort (random pivot),1000,random,10501
+Heap Sort,1000,random,16822
+Insertion Sort,1000,sorted,999
+Merge Sort,1000,sorted,4932
+Quick Sort (first pivot),1000,sorted,499500
+Quick Sort (random pivot),1000,sorted,11362
+Heap Sort,1000,sorted,17583
+Insertion Sort,1000,reversed,499500
+Merge Sort,1000,reversed,5044
+Quick Sort (first pivot),1000,reversed,499500
+Quick Sort (random pivot),1000,reversed,10623
+Heap Sort,1000,reversed,15965
+Insertion Sort,2000,random,1000146
+Merge Sort,2000,random,19424
+Quick Sort (first pivot),2000,random,24853
+Quick Sort (random pivot),2000,random,25156
+Heap Sort,2000,random,37656
+Insertion Sort,2000,sorted,1999
+Merge Sort,2000,sorted,10864
+Quick Sort (first pivot),2000,sorted,1999000
+Quick Sort (random pivot),2000,sorted,25052
+Heap Sort,2000,sorted,39159
+Insertion Sort,2000,reversed,1999000
+Merge Sort,2000,reversed,11088
+Quick Sort (first pivot),2000,reversed,1999000
+Quick Sort (random pivot),2000,reversed,23265
+Heap Sort,2000,reversed,35964
+Insertion Sort,4000,random,4033390
+Merge Sort,4000,random,42795
+Quick Sort (first pivot),4000,random,52720
+Quick Sort (random pivot),4000,random,53178
+Heap Sort,4000,random,83431
+Insertion Sort,4000,sorted,3999
+Merge Sort,4000,sorted,23728
+Quick Sort (first pivot),4000,sorted,7998000
+Quick Sort (random pivot),4000,sorted,59822
+Heap Sort,4000,sorted,86576
+Insertion Sort,4000,reversed,7998000
+Merge Sort,4000,reversed,24176
+Quick Sort (first pivot),4000,reversed,7998000
+Quick Sort (random pivot),4000,reversed,53285
+Heap Sort,4000,reversed,80151
+Insertion Sort,8000,random,15925783
+Merge Sort,8000,random,93610
+Quick Sort (first pivot),8000,random,119727
+Quick Sort (random pivot),8000,random,122077
+Heap Sort,8000,random,182885
+Insertion Sort,8000,sorted,7999
+Merge Sort,8000,sorted,51456
+Quick Sort (first pivot),8000,sorted,31996000
+Quick Sort (random pivot),8000,sorted,120118
+Heap Sort,8000,sorted,189377
+Insertion Sort,8000,reversed,31996000
+Merge Sort,8000,reversed,52352
+Quick Sort (first pivot),8000,reversed,31996000
+Quick Sort (random pivot),8000,reversed,124376
+Heap Sort,8000,reversed,176057
