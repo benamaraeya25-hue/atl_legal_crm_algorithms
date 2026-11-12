@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case-Law Research Engine</title>
+<meta name="description" content="CPS 3440 portfolio project: benchmarking sorting, look-up and Top-K search algorithms on one million real Supreme Court opinion passages.">
+<style>
+:root{color-scheme:light;--bg:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--rule:#e1e0d9;--link:#1c5cab;--accent:#2a78d6}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0d0d0d;--surface:#1a1a19;--ink:#f0efec;--ink2:#c3c2b7;--rule:#2c2c2a;--link:#86b6ef;--accent:#3987e5}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
+nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--rule);padding:8px 0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;z-index:2}
+header{padding:36px 0 8px}
+h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:0 0 8px}
+h2{font-size:24px;margin:48px 0 8px;scroll-margin-top:56px}
+p,li{max-width:72ch}
+.sub{color:var(--ink2);margin:0 0 4px}
+a{color:var(--link)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:24px 0}
+.tile{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.tile b{display:block;font-size:30px;line-height:1.1}
+.tile span{color:var(--ink2);font-size:14px}
+figure{margin:16px 0;background:#fcfcfb;border:1px solid var(--rule);border-radius:10px;padding:8px}
+figure img{width:100%;height:auto;display:block}
+figcaption{color:#52514e;font-size:14px;padding:4px 8px 6px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface)}
+caption{text-align:left;color:var(--ink2);padding:6px 0;font-size:13px}
+th,td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;white-space:nowrap}
+thead th{border-bottom:2px solid var(--rule)}
+td.n{font-variant-numeric:tabular-nums;text-align:right}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px}
+pre{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:12px;overflow-x:auto}
+.note{color:var(--ink2);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Sections">
+<a href="#home">Home</a><a href="#problem">The Problem</a><a href="#dataset">Dataset</a><a href="#solution">Our Solution</a><a href="#algorithms">Algorithms</a><a href="#complexity">Complexity</a><a href="#results">Results</a><a href="#demo">Demo</a><a href="#tech">Technologies</a><a href="#team">Team</a><a href="#resources">Resources</a>
+</nav>
+
+<header id="home">
+<h1>Which algorithms keep a case-law search fast?</h1>
+<p class="sub">Hand-written sorting, look-up and Top-K search algorithms, benchmarked on one million passages of real U.S. Supreme Court opinions.</p>
+<p class="sub">Eya Ben Amara · CPS 3440 Analysis of Algorithms · Kean University · Fall 2026</p>
+<div class="tiles">
+<div class="tile"><b>1,000,000</b><span>real court-opinion passages benchmarked</span></div>
+<div class="tile"><b>≈ 4,500×</b><span>faster rare-term search: inverted index + heap vs full scan (568 ms → 0.125 ms)</span></div>
+<div class="tile"><b>19 ms → 1.9 µs</b><span>one citation look-up: linear vs binary search</span></div>
+<div class="tile"><b>68</b><span>unit tests; every method checked against a reference</span></div>
+</div>
+<figure><img src="figures/retrieval_runtime.png" alt="Log-log chart of search time versus number of passages for scan, index plus sort and index plus heap, for rare, medium and common queries"><figcaption>Search time per query as the collection grows (log scales). The scan grows with the whole collection; the index methods grow with the number of matches.</figcaption></figure>
+</header>
+
+<section id="problem">
+<h2>The Problem</h2>
+<p>Lawyers spend much of their time reading prior decisions. A research tool must put authorities in date order, open an exact cited passage, and find the few best passages for a concept out of millions. At small scale any method works. At large scale the wrong algorithm turns an instant search into a half-second wait on every query, or an hour-long sort. This project measures where that happens and why.</p>
+</section>
+
+<section id="dataset">
+<h2>Dataset</h2>
+<p><b>Supreme Court Decisions</b> (textacy-data v1.0): 8,417 usable decisions from 1946 to 2016, 360 million characters. Text comes from FindLaw; metadata (date, citation) from the Supreme Court Database (CC BY-NC 3.0 US). Each decision is split into sentence-level passages (2,152,182 in total); a seeded random sample of 1,000,000 is used, with 1k, 10k and 100k as nested subsets. Each passage gets a numeric key from decision date, case and sentence number, so it works as a pinpoint citation and a chronological sort key. The raw file is not stored in the repository; one command downloads it. <a href="docs/DATASET.md">Dataset documentation</a>.</p>
+</section>
+
+<section id="solution">
+<h2>Our Solution</h2>
+<p>A small Python package, <code>caselaw</code>, with three tasks, each solved by at least three hand-written approaches: <b>sort</b> passages by date, <b>look up</b> a passage by key, and <b>search</b> by keyword returning the top ten. A command-line tool lets a reviewer run each task with any method and see the time taken; benchmark scripts reproduce every number and chart on this page from scratch.</p>
+<p>Reviewers can: run <code>python -m caselaw.cli search "equal protection"</code> and choose the method; run <code>pytest</code> for the 68 tests; or run <code>bash benchmarks/run_all.sh</code> to regenerate results.</p>
+</section>
+
+<section id="algorithms">
+<h2>Algorithms</h2>
+<ul>
+<li><b>Sorting:</b> insertion, merge, quick sort with first or random pivot, heap sort. They span the textbook range: quadratic, optimal, and "fast on average but with a bad case".</li>
+<li><b>Look-up:</b> linear search, binary search, and a chaining hash table with Fibonacci hashing: the three standard access structures.</li>
+<li><b>Top-K retrieval:</b> (A) scan every passage then sort matches, (B) inverted index then sort, (C) inverted index then a size-K heap. B and C separate the effect of the index from the effect of how the top ten are chosen.</li>
+</ul>
+<p class="note">Python's built-in <code>sorted()</code> and <code>dict</code> appear in charts only as labeled references.</p>
+</section>
+
+<section id="complexity">
+<h2>Complexity</h2>
+<div class="tw"><table>
+<caption>n = passages, m = matching passages, P = postings scanned, K = 10</caption>
+<thead><tr><th>Algorithm</th><th>Time</th><th>Extra space</th></tr></thead>
+<tbody>
+<tr><td>Insertion sort</td><td>O(n²); O(n) if sorted</td><td>O(1)</td></tr>
+<tr><td>Merge sort</td><td>Θ(n log n)</td><td>O(n)</td></tr>
+<tr><td>Quick sort</td><td>O(n log n) average; O(n²) first pivot on sorted input</td><td>O(log n)</td></tr>
+<tr><td>Heap sort</td><td>Θ(n log n)</td><td>O(1)</td></tr>
+<tr><td>Linear / binary search</td><td>O(n) / O(log n)</td><td>O(1)</td></tr>
+<tr><td>Hash table</td><td>O(1) expected</td><td>O(n)</td></tr>
+<tr><td>Retrieval A / B / C</td><td>O(nL + m log m) / O(P + m log m) / O(P + m log K)</td><td>O(m) / index / index</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="results">
+<h2>Results</h2>
+<p>Medians of repeated runs on a 2-vCPU cloud container, Python 3.13. Quadratic cases at 100k and above were skipped, not extrapolated. Full data in <a href="results/">results/</a>.</p>
+<figure><img src="figures/sorting_runtime.png" alt="Sorting time versus n for three input orders"><figcaption>Sorting: insertion sort is best on sorted input and unusable on random; first-pivot quick sort has a cliff on sorted input.</figcaption></figure>
+<div class="tw"><table>
+<caption>Sorting, n = 1,000,000 (seconds)</caption>
+<thead><tr><th>Algorithm</th><th>Random</th><th>Sorted</th><th>Reversed</th></tr></thead>
+<tbody>
+<tr><td>Insertion</td><td class="n">skipped</td><td class="n">0.109</td><td class="n">skipped</td></tr>
+<tr><td>Merge</td><td class="n">3.02</td><td class="n">2.45</td><td class="n">2.24</td></tr>
+<tr><td>Quick, first pivot</td><td class="n">2.25</td><td class="n">skipped</td><td class="n">skipped</td></tr>
+<tr><td>Quick, random pivot</td><td class="n">2.19</td><td class="n">1.70</td><td class="n">2.41</td></tr>
+<tr><td>Heap</td><td class="n">5.09</td><td class="n">3.81</td><td class="n">3.47</td></tr>
+<tr><td>Built-in sorted() (reference)</td><td class="n">0.329</td><td class="n">0.036</td><td class="n">0.035</td></tr>
+</tbody></table></div>
+<figure><img src="figures/lookup_runtime.png" alt="Look-up time per search versus n"><figcaption>Look-up: linear search grows with n; binary search and hashing are nearly flat.</figcaption></figure>
+<div class="tw"><table>
+<caption>Retrieval, n = 1,000,000 (milliseconds per query)</caption>
+<thead><tr><th>Query</th><th>Matches</th><th>A scan + sort</th><th>B index + sort</th><th>C index + heap</th></tr></thead>
+<tbody>
+<tr><td>wiretap</td><td class="n">198</td><td class="n">568</td><td class="n">0.289</td><td class="n">0.125</td></tr>
+<tr><td>equal protection</td><td class="n">14,606</td><td class="n">1,107</td><td class="n">21.2</td><td class="n">3.67</td></tr>
+<tr><td>court</td><td class="n">185,602</td><td class="n">1,022</td><td class="n">303</td><td class="n">44.0</td></tr>
+</tbody></table></div>
+<p>The index costs 14.4 s and 167 MB to build, repaid after about 16 queries. A heap picks the top ten of 185,602 matches in 5.5 ms; sorting them all takes 264 ms.</p>
+<figure><img src="figures/sorting_comparisons.png" alt="Counted comparisons versus n for each sort"><figcaption>Exact comparison counts match theory: n(n−1)/2 = 31,996,000 for insertion sort on reversed input at n = 8,000.</figcaption></figure>
+<p><b>Theory vs observed:</b> n log n sorts show log-log slopes of 1.12–1.19 (theory ≈ 1.10 over this range); linear search 1.07; hash table 0.00; the scan 0.98–1.00. The best hand-written sort is still ≈ 9× slower than the C-implemented <code>sorted()</code>, a reminder that constant factors matter.</p>
+<p class="note"><b>Recommendation:</b> an inverted index with heap Top-K for search; a sorted array with binary search for citation look-up; merge sort or random-pivot quick sort when a sort must be written by hand.</p>
+</section>
+
+<section id="demo">
+<h2>Demo / Visualizations</h2>
+<p>Real output from the command-line tool (100,000 passages; the index is built once, then each query is fast):</p>
+<pre>$ python -m caselaw.cli search "equal protection" --k 3 --passages 100000
+100,000 passages | method: index-heap | words: ['equal', 'protection']
+index built in 1.30 s (once); query took 0.4 ms
+
+ 1. score 5  HADLEY et al. v. JUNIOR COLLEGE DISTRICT OF METROPOLITAN KAN (1970-02-25, 397 U.S. 50)
+      Held: Whenever a state or local government by popular election selects persons ...
+ 3. score 4  DOUGLAS et al. v. CALIFORNIA (1963-03-18, 372 U.S. 353)
+
+$ python -m caselaw.cli lookup "329 U.S. 1"
+looking up '329 U.S. 1' among 8,083 citations
+  linear search  position 0   0.16 microseconds
+  binary search  position 0   1.00 microseconds
+  hash table     position 0   0.25 microseconds</pre>
+<figure><img src="figures/topk_selection.png" alt="Time to choose the top 10 of m matches: full sort versus heap"><figcaption>Choosing the top 10: the heap's advantage grows with the number of matches.</figcaption></figure>
+<figure><img src="figures/memory.png" alt="Peak extra memory per item for each algorithm"><figcaption>Memory: merge sort needs about 33 bytes per item of extra space; the hash table 318 bytes per key versus 103 for the built-in dict.</figcaption></figure>
+</section>
+
+<section id="tech">
+<h2>Technologies</h2>
+<p>Python 3.13 (standard library only for all algorithms and data handling), matplotlib for charts, pytest for tests, Git and GitHub, GitHub Pages for this site.</p>
+</section>
+
+<section id="team">
+<h2>Team</h2>
+<p><b>Eya Ben Amara</b>, individual project: problem selection, dataset pipeline, all algorithm implementations, tests, benchmarks, analysis, paper and site. See <a href="CONTRIBUTIONS.md">CONTRIBUTIONS.md</a> (includes disclosure of generative-AI assistance).</p>
+<p>Portfolio bullets:</p>
+<ul>
+<li>Implemented and benchmarked five sorting, three look-up and three Top-K retrieval algorithms in Python on 1,000,000 passages of real U.S. Supreme Court opinions, with 68 unit tests and measured runtime, comparison counts and memory.</li>
+<li>Built an inverted-index search with heap-based Top-K that answered rare queries about 4,500× faster than a full scan, and documented findings against theoretical complexity in a public GitHub portfolio and technical paper.</li>
+</ul>
+</section>
+
+<section id="resources">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://github.com/benamaraeya25-hue/atl_legal_crm_algorithms">GitHub repository</a></li>
+<li><a href="docs/PAPER.md">Technical paper</a></li>
+<li><a href="presentation/">Presentation slides</a></li>
+<li><a href="docs/DATASET.md">Dataset documentation</a> · <a href="docs/PSEUDOCODE.md">Pseudocode</a> · <a href="results/">Raw results (CSV)</a></li>
+</ul>
+</section>
+</div>
+</body>
+</html>
